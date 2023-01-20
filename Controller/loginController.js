@@ -1,11 +1,60 @@
-const Task = require("../Model/login")
+const User = require("../Model/login");
+const bcrypt = require("bcrypt");
+const auth = require("../auth");
 
-module.exports.login = (username) => {
-	return Task.findOne(username).then(result => {
-		if(result.json().length > 0){
-            console.log("Login");
+
+
+//test get all
+module.exports.getAll = () => {
+    return {
+        "name" : "Kendrick",
+        "last" : "mundiz"
+    }
+}
+//login module
+module.exports.login = (reqBody) => {
+	return User.findOne({ email : reqBody.email }).then(result => {
+		if(result == null){
+            return {
+                message : "User not found on database"
+            }
         }else{
-            console.log("Cannot login")
+            if(bcrypt.compareSync(reqBody.password, result.password)){
+                 return {
+                    accessToken : auth.createAccessToken(result),
+                    firstName : result.firstName,
+                    lastname : result.lastName,
+                    userType : result.userType
+                }
+            }else{
+                return{
+                    message : "incorrect password"
+                }
+            }
+           
         }
 	})
+}
+
+
+//registration module
+module.exports.registerUser = (reqBody) => {
+    let newUser = new User({
+        firstName : reqBody.firstName,
+        lastName : reqBody.lastName,
+        email : reqBody.email,
+        password : bcrypt.hashSync(reqBody.password, 10)
+    });
+
+    return newUser.save().then((user, error) => {
+        if(error){
+            return {
+                message : "an error occured"
+            }
+        }else{
+            return {
+                message : `Successfully added ${user.firstName} ${user.lastName}`
+            }
+        }
+    })
 }

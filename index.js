@@ -1,13 +1,18 @@
 // setup dependencies
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require('cors');
 require("dotenv").config();
+
 
 //server setup
 const app = express();
 const port = 5001;
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+
+//cors
+app.use(cors());
 
 //connect database
 mongoose.connect(
@@ -23,6 +28,10 @@ db.on("open", () => console.log("Connected to database"));
 //call Routes
 const loginRoute = require("./Routes/loginRoute");
 
-app.use("/login", loginRoute);
+
+//use routes
+app.use("/user", loginRoute);
+
+
 
 app.listen(port, () => console.log(`Server listening at port: ${port}`))
