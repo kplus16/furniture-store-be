@@ -2,14 +2,20 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
 
-	firstName: String,
-    lastName: String,
     email : String,
     password: String,
-	userType : {
-		type : String,
+	isAdmin : {
+		type : Boolean,
 		default : "customer"
-	}
+	},
+	orders : [{
+		products : [{
+			productName : String,
+			quantity : number
+		}],
+		totalAmount: number,
+		purchasedOn: new Date(+new Date() + 7*24*60*60*1000),
+	}]
 });
 
 module.exports = mongoose.model("User", userSchema);
