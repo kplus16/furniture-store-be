@@ -1,16 +1,17 @@
-const User = require("../Model/login");
+const User = require("../Model/user");
 const bcrypt = require("bcrypt");
 const auth = require("../auth");
 
 
 
 //test get all
-module.exports.getAll = () => {
-    return {
-        "name" : "Kendrick",
-        "last" : "mundiz"
-    }
-}
+// module.exports.getAll = () => {
+//     return {
+//         "name" : "Kendrick",
+//         "last" : "mundiz"
+//     }
+// }
+
 //login module
 module.exports.login = (reqBody) => {
 	return User.findOne({ email : reqBody.email }).then(result => {
@@ -58,3 +59,9 @@ module.exports.registerUser = (reqBody) => {
         }
     })
 }
+
+//retrieve user details
+
+//set user as admin - admin only
+
+//

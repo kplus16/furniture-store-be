@@ -26,7 +26,7 @@ db.on("error", console.error.bind(console, "Conn error"));
 db.on("open", () => console.log("Connected to database"));
 
 //call Routes
-const loginRoute = require("./Routes/loginRoute");
+const loginRoute = require("./Routes/userRoute");
 
 
 //use routes

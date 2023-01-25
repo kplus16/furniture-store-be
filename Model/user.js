@@ -11,10 +11,13 @@ const userSchema = new mongoose.Schema({
 	orders : [{
 		products : [{
 			productName : String,
-			quantity : number
+			quantity : Number
 		}],
-		totalAmount: number,
-		purchasedOn: new Date(+new Date() + 7*24*60*60*1000),
+		totalAmount: Number,
+		purchasedOn: {
+			type : Date,
+			default : new Date(+new Date() + 7*24*60*60*1000)
+		}
 	}]
 });
 

@@ -1,21 +1,23 @@
 const express = require("express");
 const router = express.Router();
 
-const loginController = require("../Controller/loginController");
+const loginController = require("../Controller/userController");
+
 //test get
-router.get("/", (req, res) => {
-	loginController.getAll()
-	.then(result => res.send(result))
-})
+// router.get("/", (req, res) => {
+// 	loginController.getAll()
+// 	.then(result => res.send(result))
+// })
+
 //login
 router.post("/login", (req, res) => {
-    loginController.login(req.body)
+    userController.login(req.body)
     .then(result => res.send(result))
 })
 
 //signup
 router.post("/register", (req, res) =>{
-    loginController.registerUser(req.body)
+    userController.registerUser(req.body)
     .then(result => res.send(result));
 })
 
