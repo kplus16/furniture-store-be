@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const products = require("./products")
 
-const newProductSchema = new mongooose.Schema({
+const newProductSchema = new mongoose.Schema({
+        productId : String,
         productName : String,
         quantity : {
             type: Number,
@@ -20,9 +21,6 @@ const orderSchema = new mongoose.Schema({
     totalAmount: {
         type: Number,
         default : 0
-        // default: function() {
-        //     return this.products.reduce((total, obj) => total + (obj.quantity*obj.price), 0);
-        // }
     },
     purchasedOn : {
         type : Date,

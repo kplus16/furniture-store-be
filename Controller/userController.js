@@ -1,6 +1,4 @@
 const User = require("../Model/user");
-const Product = require("../Model/products");
-const Order = require("../Model/Products");
 const bcrypt = require("bcrypt");
 const auth = require("../auth");
 
@@ -57,7 +55,15 @@ module.exports.registerUser = (reqBody) => {
 }
 
 //retrieve user details
-
+module.exports.getUserData = (userId) => {
+    return User.findById(userId)
+    .then(result => {
+        if (result === null){
+            return "User not found"
+        } else {
+            return result
+        }
+    })
+}
 //set user as admin - admin only
 
-//

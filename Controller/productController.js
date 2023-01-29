@@ -49,12 +49,12 @@ module.exports.updateProduct = (reqParams, reqBody) => {
 }
 //retrieve single product
 module.exports.getProduct = (reqParams) => {
-    return Product.findById(reqParams)
+    return Product.find({_id : reqParams})
     .then(result => {
-        if (result.length > 0){
-            return result
-        } else {
+        if (result.length === 0){
             return `Product not found`
+        } else {
+           return result
         }
     })
 }
@@ -62,7 +62,7 @@ module.exports.getProduct = (reqParams) => {
 module.exports.archiveProduct = (reqParams) => {
     return Product.findByIdAndUpdate(reqParams, {isActive: false})
     .then(result => {
-        if(result.length > 0){
+        if(result.length === 0){
             return "Product not found"
         } else {
             return `${result.name} has been archived`

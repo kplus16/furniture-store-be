@@ -12,14 +12,19 @@ router.get("/getAllOrders", auth.verify, (req, res) => {
     }else{
         res.send({message : "User must be admin to create a product"})
     }
-})
+});
 
 
 //retrieve orders for specific user
 router.get("/getMyOrders", auth.verify, (req, res) => {
     orderController.getMyOrders(auth.decode(req.headers.authorization).id)
     .then(result => res.send(result))
-})
+});
+
+router.post("/createOrder", auth.verify, (req, res) => {
+    orderController.createOrder(auth.decode(req.headers.authorization).id , req.body)
+    .then(result => res.send(result))
+});
 
 
 

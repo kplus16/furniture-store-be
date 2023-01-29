@@ -14,6 +14,12 @@ router.post("/createproduct", auth.verify, (req, res) => {
     }
 });
 
+//retrieve all active products
+router.get("/", (req, res) => {
+    productController.getActiveProducts()
+    .then(result => res.send(result))
+});
+
 //update product route
 router.put("/updateProduct/:productId", auth.verify, (req, res) => {
     if(auth.decode(req.headers.authorization).isAdmin){
@@ -24,15 +30,15 @@ router.put("/updateProduct/:productId", auth.verify, (req, res) => {
     }
 });
 //get one product route
-router.get("/getproduct/:productId", (req, res) => {
-    pruductController.getProduct(req.params.productId)
+router.get("/:productId", (req, res) => {
+    productController.getProduct(req.params.productId)
     .then(result => res.send(result))
 });
 
 //archive product route
 router.put("/archiveProduct/:productId", auth.verify, (req, res) => {
     if(auth.decode(req.headers.authorization).isAdmin){
-        productController.updateProduct(req.params.productId)
+        productController.archiveProduct(req.params.productId)
         .then(result => res.send(result))
     }else{
         res.send({message : "User must be admin to create a product"})

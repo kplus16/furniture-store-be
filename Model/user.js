@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require('mongoose-unique-validator');
 
+const productSchema = new mongoose.Schema({
+  productName: { type: String, required: true },
+  quantity: { type: Number, required: true },
+  price: { type: Number, required: true }
+});
 
 const userSchema = new mongoose.Schema({
     email : {
@@ -16,18 +21,28 @@ const userSchema = new mongoose.Schema({
 		type : Boolean,
 		default : false
 	},
-	orders : [{
-		products : [{
-			productName : String,
-			quantity : Number
-		}],
-		totalAmount: Number,
-		purchasedOn: {
-			type : Date,
-			default : () => Date.now()
-		}
+	cart : [{
+		productName: { type: String, required: true },
+		quantity: { type: Number, required: true },
 	}]
 });
+
+// userSchema.virtual("subTotal").get(function() {
+//   return this.quantity * this.price;
+// });
+
 userSchema.plugin(uniqueValidator);
+
+// productSchema.post("save", function(doc) {
+//   doc.constructor.updateOne(
+//     { _id: doc.owner },
+//     { $inc: { totalAmount: doc.quantity * doc.price } },
+//     function(error, cart) {
+//       if (error) {
+//         console.log("Error updating totalAmount:", error);
+//       }
+//     }
+//   );
+// });
 
 module.exports = mongoose.model("User", userSchema);
