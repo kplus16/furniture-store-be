@@ -1,4 +1,6 @@
 const User = require("../Model/user");
+const Product = require("../Model/products");
+const Order = require("../Model/Products");
 const bcrypt = require("bcrypt");
 const auth = require("../auth");
 
@@ -23,9 +25,6 @@ module.exports.login = (reqBody) => {
             if(bcrypt.compareSync(reqBody.password, result.password)){
                  return {
                     accessToken : auth.createAccessToken(result),
-                    firstName : result.firstName,
-                    lastname : result.lastName,
-                    userType : result.userType
                 }
             }else{
                 return{
@@ -41,20 +40,17 @@ module.exports.login = (reqBody) => {
 //registration module
 module.exports.registerUser = (reqBody) => {
     let newUser = new User({
-        firstName : reqBody.firstName,
-        lastName : reqBody.lastName,
         email : reqBody.email,
         password : bcrypt.hashSync(reqBody.password, 10)
     });
-
     return newUser.save().then((user, error) => {
         if(error){
             return {
-                message : "an error occured"
+                message : errors.email.message
             }
         }else{
             return {
-                message : `Successfully added ${user.firstName} ${user.lastName}`
+                message : `Successfully added ${user.email}`
             }
         }
     })

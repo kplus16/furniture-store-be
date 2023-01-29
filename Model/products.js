@@ -1,16 +1,25 @@
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-    name : String,
-    description : String,
-    price : Number,
+    name : {
+        type : String,
+        required : [true, "Product name is required"]
+    },
+    description : {
+        type : String,
+        required : [true, "Product description is required"]
+    },
+    price : {
+        type : Number,
+        required : [true, "Product price is required"]
+    },
     isActive : {
         type : Boolean,
         default : true
     },
     createdOn : {
 			type : Date,
-			default : new Date(+new Date() + 7*24*60*60*1000)
+			default : () => Date.now()
 	}
 });
 

@@ -1,12 +1,20 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require('mongoose-unique-validator');
+
 
 const userSchema = new mongoose.Schema({
-
-    email : String,
-    password: String,
+    email : {
+		type: String,
+		required : true,
+		unique : true
+	},
+    password: {
+		type: String,
+		required : true
+	},
 	isAdmin : {
 		type : Boolean,
-		default : "customer"
+		default : false
 	},
 	orders : [{
 		products : [{
@@ -16,9 +24,10 @@ const userSchema = new mongoose.Schema({
 		totalAmount: Number,
 		purchasedOn: {
 			type : Date,
-			default : new Date(+new Date() + 7*24*60*60*1000)
+			default : () => Date.now()
 		}
 	}]
 });
+userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model("User", userSchema);

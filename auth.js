@@ -12,11 +12,9 @@ module.exports.createAccessToken = (user) => {
     const data = {
         id : user._id,
         email : user.email,
-        isAdmin : user.userType
+        isAdmin : user.isAdmin
     }
-    return jwt.sign(data, secret, {
-        //expiresIn: 1200 - for session timeout
-    })
+    return jwt.sign(data, secret)
 }
 
 // Allows the application to proceed with the next middleware function/callback function in the route
@@ -37,7 +35,7 @@ module.exports.verify = (req, res, next) => {
             }
         })
     }else{
-        return res.send({ auth : "failed"})
+        return res.send({ auth : "Please login first"})
     }
 
 }
