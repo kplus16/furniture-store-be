@@ -16,7 +16,7 @@ app.use(cors());
 
 //connect database
 mongoose.connect(
-  `mongodb+srv://kendrick123:${process.env.MONGODB_PASSWORD}@cluster0.nkwttx3.mongodb.net/Furniture_Store_db?retryWrites=true&w=majority`,
+  `mongodb+srv://kendrick123:kendrick123}@cluster0.nkwttx3.mongodb.net/Furniture_Store_db?retryWrites=true&w=majority`,
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
