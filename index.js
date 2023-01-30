@@ -32,6 +32,7 @@ const orderRoute = require("./Routes/orderRoutes")
 
 
 //use routes
+app.use("/", "Hello Server")
 app.use("/user", userRoute);
 app.use("/product", productRoute);
 app.use("/orders", orderRoute);
