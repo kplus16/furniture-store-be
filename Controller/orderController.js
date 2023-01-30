@@ -27,10 +27,7 @@ module.exports.getMyOrders = (userId) => {
 
 //createOrder
 module.exports.createOrder = async (userId, orderDetails) => {
-        // const products1 = [
-        //     { productId: "63d63fc97dfe2d5e83362969", quantity: 4 },
-        //     { productId: "63d65d3b197bd07f380d3c5a", quantity: 3 },
-        // ];
+        
 
         const productIds = orderDetails.map(product => product.productId);
         const quantities = orderDetails.map(product => product.quantity);
@@ -65,6 +62,10 @@ module.exports.createOrder = async (userId, orderDetails) => {
         
 }
 
+        // const products1 = [
+        //     { productId: "63d63fc97dfe2d5e83362969", quantity: 4 },
+        //     { productId: "63d65d3b197bd07f380d3c5a", quantity: 3 },
+        // ];
  
         // await Product.find({ _id : {$in : productIds}})
         //         .then(result => {
