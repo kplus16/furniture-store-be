@@ -4,11 +4,7 @@ const auth = require("../auth");
 
 const userController = require("../Controller/userController");
 
-//test get
-// router.get("/", (req, res) => {
-// 	loginController.getAll()
-// 	.then(result => res.send(result))
-// })
+
 
 //login
 router.post("/login", (req, res) => {
