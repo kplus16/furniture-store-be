@@ -23,6 +23,8 @@ module.exports.login = (reqBody) => {
             if(bcrypt.compareSync(reqBody.password, result.password)){
                  return {
                     accessToken : auth.createAccessToken(result),
+                    userType : result.isAdmin,
+                    email : result.email
                 }
             }else{
                 return{

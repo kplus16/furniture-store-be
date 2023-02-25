@@ -22,7 +22,7 @@ module.exports.createProduct = (reqBody) => {
 
 //retrieve all active products
 module.exports.getActiveProducts = () => {
-    return Product.find({isActive : true})
+    return Product.find({})
     .then(result => {
         if (result.length > 0){
             return result
