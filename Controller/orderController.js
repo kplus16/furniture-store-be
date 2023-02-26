@@ -2,8 +2,8 @@ const Order = require("../Model/orders");
 const Product = require("../Model/products");
 
 //retrieve all orders admin only
-module.exports.getAllOrders = (userId) => {
-    Order.find({})
+module.exports.getAllOrders = () => {
+    return Order.find({})
     .then(result => {
         if (result.length > 0){
             return result
@@ -15,7 +15,7 @@ module.exports.getAllOrders = (userId) => {
 
 //retrieve orders for specific user
 module.exports.getMyOrders = (userId) => {
-    Order.find({userId : userId})
+    return Order.find({userId : userId})
     .then(result => {
         if (result.length > 0){
             return result

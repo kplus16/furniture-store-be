@@ -58,9 +58,9 @@ module.exports.getProduct = (reqParams) => {
         }
     })
 }
-//archive product admin only
+//archive product admin only {isActive: !this.isActive}
 module.exports.archiveProduct = (reqParams) => {
-    return Product.findByIdAndUpdate(reqParams, {isActive: false})
+    return Product.findByIdAndUpdate(reqParams, [{$set:{isActive:{$eq:[false,"$isActive"]}}}])
     .then(result => {
         if(result.length === 0){
             return "Product not found"

@@ -1,6 +1,31 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../auth");
+// const { Storage } = require("@google-cloud/storage")
+// const Multer = require('multer')
+// require("dotenv").config();
+
+// const storage = new Storage({
+//     projectId: process.env.GCLOUD_PROJECT_NAME, 
+//     credentials: {
+//         client_email: process.env.GCLOUD_STORAGE_EMAIL, 
+//         private_key: process.env.GCLOUD_PRIVATE_KEY
+//     }
+// });
+
+// const bucket = storage.bucket(process.env.GCLOUD_BUCKET_NAME);
+
+// const multer = Multer({
+//     storage: Multer.memoryStorage(),
+//     limits: {
+//         fileSize: 5 * 1024 * 1024
+//     }
+// });
+
+// router.post('/profile', upload.single('avatar'), function (req, res, next) {
+//   // req.file is the `avatar` file
+//   // req.body will hold the text fields, if there were any
+// })
 
 const productController = require("../Controller/productController");
 
@@ -14,7 +39,7 @@ router.post("/createproduct", auth.verify, (req, res) => {
     }
 });
 
-//retrieve all active products 
+//retrieve all 
 router.get("/", (req, res) => {
     productController.getActiveProducts()
     .then(result => res.send(result))
